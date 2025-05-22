@@ -1,17 +1,15 @@
-import express from "express";
-import { mainModule } from "process";
+import express, {json} from "express";
 import {sequelize} from "./config/database";
-import User from "./models/User";
+import { usersRouter } from "./routes/userRoutes";
 
 const app = express();
 const port = 3000;
 
-app.get("/", (req, res) => {
-  res.send("Hello World!");
-});
+app.use(json());
+
+app.use(usersRouter);
 
 main()
-
 
 async function main() {
   if (require.main === module) {
@@ -21,8 +19,5 @@ async function main() {
         console.log(`Listening at http://localhost:${port}`),
     );
     });
-
-    const user = await User.create({ name: 'Alice', email: 'alice@email.com'});
-    console.log("Usuário criado:", user.toJSON());
   }
 }

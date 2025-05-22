@@ -1,7 +1,5 @@
 import User from "../models/User";
-
-
-export class UserService {
+export class userService {
 
     async create(userData: { name: string; email: string; }) {
         const existingUser = await User.count({
@@ -45,3 +43,4 @@ export class UserService {
     }
 
 }
+export default new userService();
